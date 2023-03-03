@@ -10,7 +10,7 @@ const Body = () => {
     const [RestaurantData,setRestaurantData]=useState([])
     const [filteredRestaurantList,setFilteredRestarauntList]=useState([])
     const onlineStatus=useOnline()
-    const user=useContext(UserContext)
+    
    // console.log("onlineStatus: ",onlineStatus)
     useEffect(()=>{
       // fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=15.36548488436243&lng=75.12987278401853&offset=15&sortBy=RELEVANCE&pageType=SEE_ALL&page_type=DESKTOP_SEE_ALL_LISTING")
@@ -50,14 +50,10 @@ const Body = () => {
     <>
     
     <div className="bg-violet-300 p-2 mt-2 mb-2 shadow-md max-sm:flex max-sm:justify-center">
-        <h1 onClick={()=>user.setUserValue(
-        {...user,name:"Changed-name"}
-         
-        )}>My name is {user.name}</h1>
-        <input className="mr-2 p-1  rounded-md" type="text" placeholder="Search" value={text} onChange={(e)=>setText(e.target.value)} />
-        <button className="bg-blue-400 rounded-md  hover:text-white px-2 py-1" onClick={()=> setFilteredRestarauntList( filterFunction(text,RestaurantData))}>Search</button>
+        <input  data-testid="search-input" className="mr-2 p-1  rounded-md" type="text" placeholder="Search" value={text} onChange={(e)=>setText(e.target.value)} />
+        <button data-testid="search-btn" className="bg-blue-400 rounded-md  hover:text-white px-2 py-1" onClick={()=> setFilteredRestarauntList( filterFunction(text,RestaurantData))}>Search</button>
     </div>
-    <div className="flex flex-wrap gap-5 justify-center">
+    <div data-testid="restaurant-list" className="flex flex-wrap gap-5 justify-center">
       {filteredRestaurantList.length===0?<h1>No results found</h1>:filteredRestaurantList.map((restaurant) => (
      <Link to={`/restaurant-menu/${restaurant?.data?.data?.id}`} key={restaurant?.data?.data?.id} >   <RestaurantCard {...restaurant?.data.data} /></Link>
       ))}

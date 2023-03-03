@@ -7,31 +7,32 @@ import Error from "./src/components/Error";
 import UserContext from "./src/utils/contexts/UserContext";
 import Contact from "./src/components/Contact";
 import RestaurantMenu from "./src/components/RestaurantMenu";
-
+import { Provider } from "react-redux";
+import store from "./src/utils/store";
 import { lazy, Suspense,useState } from "react";
 import Shimmer from "./src/components/Shimmer";
 import Instamart from "./src/components/Instamart";
-
+import Cart from "./src/components/Cart";
 const About = lazy(() => import("./src/components/About"));
 const Profile = lazy(() => import("./src/components/Profile"));
 
 const AppLayout = () => {
   const [newValue,setNewValue]=useState({
-    name:"Test User",
-    email:"user@test.com",
+    name:"Nishanth BS",
+    email:"nishanthbs18@gmail.com",
     setUserValue:(val)=>{
       setNewValue(val)
     }
     }
   )
   return (
-    <>
+    <Provider store={store}>
     <UserContext.Provider value={newValue} >
       <Header />
       <Outlet />
       <Footer />
     </UserContext.Provider>
-    </>
+    </Provider>
   );
 };
 
@@ -74,6 +75,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/restaurant-menu/:id",
         element: <RestaurantMenu />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },

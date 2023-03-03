@@ -9,8 +9,8 @@ const Section = ({
   isVisible,
   setIsVisible,
 }) => {
-  //      console.log("1. isVisible of "+id+" is "+isVisible)
-  //   console.log("2. CurrentId of "+id+" is "+currentId)
+      //  console.log("1. isVisible of "+id+" is "+isVisible)
+     //console.log("2. CurrentId of "+id+" is "+currentId)
   return (
     <div className="border border-black m-2  p-2">
       <h1 className="font-bold">{title}</h1>
@@ -38,7 +38,7 @@ const Section = ({
           >
             Show
           </button>
-          <h2>{description}</h2>
+         
         </>
       )}
     </div>
